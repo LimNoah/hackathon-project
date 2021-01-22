@@ -4,9 +4,11 @@ import com.fastcampus.board.model.Board;
 import com.fastcampus.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,6 +22,13 @@ public class BoardController {
 
         // 만약 리턴했는데 리스트가 아무것도 없다면 ??
         // null 체크 -> 예ㅊ외처리 필요
+    }
+
+    @GetMapping("/api/post/{id}")
+    public Optional<Board> getBoard(@PathVariable Long id)  {
+        Optional<Board> getBoard = boardRepository.findById(id);
+
+        return getBoard;
     }
 
 
