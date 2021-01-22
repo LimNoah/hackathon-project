@@ -22,8 +22,6 @@ public class BoardController {
 
         // 만약 리턴했는데 리스트가 아무것도 없다면 ??
         // null 체크 -> 예ㅊ외처리 필요
-<<<<<<< HEAD
-=======
     }
 
 
@@ -32,7 +30,6 @@ public class BoardController {
         Optional<Board> getBoard = boardRepository.findById(id);
 
         return getBoard;
->>>>>>> e2eb9665194688113f804f9d4dafdd15f82154e6
     }
 
 
