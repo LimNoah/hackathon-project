@@ -19,16 +19,14 @@ public class BoardController {
     @GetMapping("/api/posts")
     public List<Board> getList() {
         return boardRepository.findAll();
-
         // 만약 리턴했는데 리스트가 아무것도 없다면 ??
         // null 체크 -> 예ㅊ외처리 필요
     }
 
-
     @GetMapping("/api/post/{id}")
-    public Optional<Board> getBoard(@PathVariable Long id)  {
-        Optional<Board> getBoard = boardRepository.findById(id);
-
+    public Board getBoard(@PathVariable Long id)  {
+        Board getBoard = boardRepository.findById(id).orElse(Board.emptyObject());
+        System.out.println(">>> " + getBoard);
         return getBoard;
     }
 

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -15,9 +16,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@WebMvcTest(BoardController.class)
+@SpringBootTest
 class BoardControllerTest {
-    @Autowired
     private MockMvc mockMvc;
 
     @BeforeEach
@@ -37,11 +37,12 @@ class BoardControllerTest {
 
     @Test
     void getBoard() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/list/1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/post/1"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.writer").value("testuser"))
-                .andExpect(jsonPath("$.title").value("post-title"));
+                .andExpect(jsonPath("$.writer").value("최유선"))
+                .andExpect(jsonPath("$.title").value("게시판프로젝트1"))
+                .andExpect(jsonPath("$.content").value("프로젝트1"));
     }
 }

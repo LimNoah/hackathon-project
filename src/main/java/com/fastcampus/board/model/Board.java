@@ -28,5 +28,8 @@ public class Board {
     private LocalDate rDate; // 등록일
     private LocalDate mDate; // 수정일
 
+    public static Board emptyObject() {
+        return new Board();
+    }
 // 한 사용자 다수의 게시글
 }
