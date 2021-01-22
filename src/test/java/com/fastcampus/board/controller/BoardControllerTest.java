@@ -41,7 +41,6 @@ class BoardControllerTest {
                 .andExpect(status().isOk());
     }
 
-
     @Test
     void getBoard() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/post/1"))
