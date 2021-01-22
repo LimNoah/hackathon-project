@@ -40,7 +40,17 @@ class MemberControllerTest {
         .contentType(MediaType.APPLICATION_JSON_VALUE)
         .content(
                 objectMapper.writeValueAsString(
-                        new MemberDto(null, "yuseon", "123", "choiyuseon", "admin"))))
+                        new MemberDto(null, "yuseon", "123", "", ""))))
         .andExpect(status().isOk());
+    }
+
+    @Test
+    void join() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/join")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(
+                        objectMapper.writeValueAsString(
+                                new MemberDto(null, "yechan", "456", "kimyechan", "admin"))))
+                .andExpect(status().isOk());
     }
 }
