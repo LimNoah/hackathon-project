@@ -1,5 +1,6 @@
 package com.fastcampus.board.model;
 
+import lombok.Builder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 @Data
 @Entity
 public class Board {
+    // 게시판 필요한거 : 글 작성자, 글제목, 글날짜, 글 내용, 등록일, 수정일
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // postid, pid, 게시글id
@@ -24,7 +26,10 @@ public class Board {
     private String title; // 제목
     private String content; // 내용
     private LocalDate rDate; // 등록일
-    private LocalDate mDate; // 수정일
 
-// 한 사용자 다수의 게시글
+    // 한 사용자 다수의 게시글
+
+    public static Board emptyObject() {
+        return new Board();
+    }
 }
