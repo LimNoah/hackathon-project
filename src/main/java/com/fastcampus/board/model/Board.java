@@ -24,7 +24,11 @@ public class Board {
     private String title; // 제목
     private String content; // 내용
     private LocalDate rDate; // 등록일
-    private LocalDate mDate; // 수정일
 
-// 한 사용자 다수의 게시글
+    // 한 사용자 다수의 게시글
+
+    public static Board emptyObject() {
+        return new Board();
+    }
+
 }
