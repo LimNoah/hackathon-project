@@ -24,13 +24,12 @@ public class BoardController {
         // null 체크 -> 예ㅊ외처리 필요
     }
 
+
     @GetMapping("/api/post/{id}")
     public Optional<Board> getBoard(@PathVariable Long id)  {
         Optional<Board> getBoard = boardRepository.findById(id);
 
         return getBoard;
     }
-
-
 
 }
