@@ -75,11 +75,11 @@ class BoardControllerTest {
 
     @Test
     void deleteBoard () throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/post/delete")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/post/delete/14")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(
                         objectMapper.writeValueAsString(
-                                new BoardDto(9L, "", "", "", null ))))
+                                new BoardDto(14L, "", "", "", null ))))
                 .andExpect(status().isOk());
     }
 }
