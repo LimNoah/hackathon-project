@@ -1,10 +1,13 @@
 package com.fastcampus.board.controller;
 
+import com.fastcampus.board.dto.BoardDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -20,6 +23,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class BoardControllerTest {
     private MockMvc mockMvc;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @BeforeEach
     void before(WebApplicationContext wac) {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac)
@@ -31,7 +37,8 @@ class BoardControllerTest {
     @Test
     void getList() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/posts"))
-                .andDo(print());
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 
 
@@ -44,5 +51,35 @@ class BoardControllerTest {
                 .andExpect(jsonPath("$.writer").value("최유선"))
                 .andExpect(jsonPath("$.title").value("게시판프로젝트1"))
                 .andExpect(jsonPath("$.content").value("프로젝트1"));
+    }
+
+    @Test
+    void writeBoard() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/post")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(
+                        objectMapper.writeValueAsString(
+                                new BoardDto(null, "최유선", "게시판프로젝트8", "프로젝트8", null ))))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void updateBoard() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/post/update")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(
+                        objectMapper.writeValueAsString(
+                                new BoardDto(4L, "최유선", "게시판프로젝트4444", "프로젝트4444", null ))))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void deleteBoard () throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/post/delete")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(
+                        objectMapper.writeValueAsString(
+                                new BoardDto(9L, "", "", "", null ))))
+                .andExpect(status().isOk());
     }
 }
