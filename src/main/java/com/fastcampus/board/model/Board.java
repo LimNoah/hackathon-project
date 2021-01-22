@@ -17,7 +17,6 @@ import java.time.LocalDate;
 @Data
 @Entity
 public class Board {
-    // 게시판 필요한거 : 글 작성자, 글제목, 글날짜, 글 내용, 등록일, 수정일
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // postid, pid, 게시글id
