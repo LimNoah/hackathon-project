@@ -51,9 +51,10 @@ public class BoardController {
         boardRepository.save(updateBoard);
     }
 
-    @DeleteMapping("/api/post/delete")
-    public void deleteBoard(@RequestBody @Valid BoardDto boardDto) {
-        Board delBoard = boardRepository.findById(boardDto.getId()).orElseThrow(() -> new RuntimeException("post delete failed"));
+    @DeleteMapping("/api/post/delete/{id}")
+    public void deleteBoard(@PathVariable Long id) {
+        Board delBoard = boardRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("post delete failed"));
 
         boardRepository.delete(delBoard);
     }
