@@ -22,5 +22,5 @@ public class Board {
     private String writer;
     private String contents;
     private LocalDate rDate;
-    private LocalDate mDate
+    private LocalDate mDate;
 }
